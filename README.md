@@ -1,21 +1,17 @@
-local function GetClosestVisiblePlayer(maxDistance)
-	local closest = nil
-	local shortest = math.huge
+-- Aimbot
+if AimbotEnabled then
+	local maxDistance = 10
+	local target = GetClosestVisiblePlayer(maxDistance)
 
-	for _, player in ipairs(Players:GetPlayers()) do
-		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
-			local head = player.Character.Head
-			local screenPos, onScreen = Camera:WorldToViewportPoint(head.Position)
-			local distanceToPlayer = (head.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+	if target and target.Character and target.Character:FindFirstChild("Head") then
+		local headPos = target.Character.Head.Position
+		local look = (headPos - Camera.CFrame.Position).Unit
+		Camera.CFrame = CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + look)
 
-			if onScreen and IsVisible(head) and distanceToPlayer <= maxDistance then
-				local mouseDistance = (Vector2.new(screenPos.X, screenPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
-				if mouseDistance < shortest then
-					shortest = mouseDistance
-					closest = player
-				end
-			end
+		-- Tiro automático (caso tenha uma Tool equipada)
+		local tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
+		if tool and tool:FindFirstChild("Activate") then
+			tool:Activate()
 		end
 	end
-	return closest
 end
