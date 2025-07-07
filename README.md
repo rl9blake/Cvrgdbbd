@@ -1,12 +1,12 @@
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
-
-local LocalPlayer = Players.LocalPlayer
 local Camera = Workspace.CurrentCamera
 
--- ===== GUI Setup =====
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- ===== GUI principal =====
 local ScreenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
 ScreenGui.Name = "AimbotESP_GUI"
 
@@ -24,7 +24,7 @@ ESPButton.Text = "ESP: OFF"
 ESPButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 ESPButton.TextScaled = true
 
--- ===== Estado dos sistemas =====
+-- ===== Estado =====
 local AimbotEnabled = false
 local ESPEnabled = false
 
@@ -38,117 +38,135 @@ ESPButton.MouseButton1Click:Connect(function()
 	ESPEnabled = not ESPEnabled
 	ESPButton.Text = ESPEnabled and "ESP: ON" or "ESP: OFF"
 	ESPButton.BackgroundColor3 = ESPEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
-
-	-- Alternar visibilidade dos ESPs já existentes
-	for _, label in pairs(ESPLabels) do
-		if label and label:IsA("BillboardGui") then
-			label.Enabled = ESPEnabled
-		end
-	end
 end)
 
--- ===== Raycast Setup =====
+-- ===== Raycast para visibilidade =====
 local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Blacklist
 rayParams.IgnoreWater = true
 
-local function IsVisible(targetPart)
-	if not targetPart then return false end
+local function IsVisible(part)
 	local origin = Camera.CFrame.Position
-	local direction = (targetPart.Position - origin)
+	local direction = (part.Position - origin)
 	rayParams.FilterDescendantsInstances = {LocalPlayer.Character}
 	local result = Workspace:Raycast(origin, direction, rayParams)
-	return not result or result.Instance:IsDescendantOf(targetPart.Parent)
+	return not result or result.Instance:IsDescendantOf(part.Parent)
 end
 
--- ===== Aimbot Function =====
+-- ===== Aimbot targeting =====
 local function GetClosestVisiblePlayer()
-	local closestPlayer = nil
-	local shortestDistance = math.huge
-	local mouse = LocalPlayer:GetMouse()
+	local closest = nil
+	local shortest = math.huge
 
-	for _, player in pairs(Players:GetPlayers()) do
+	for _, player in ipairs(Players:GetPlayers()) do
 		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
 			local head = player.Character.Head
-			local screenPoint, onScreen = Camera:WorldToViewportPoint(head.Position)
+			local screenPos, onScreen = Camera:WorldToViewportPoint(head.Position)
 			if onScreen and IsVisible(head) then
-				local distance = (Vector2.new(screenPoint.X, screenPoint.Y) - Vector2.new(mouse.X, mouse.Y)).Magnitude
-				if distance < shortestDistance then
-					shortestDistance = distance
-					closestPlayer = player
+				local distance = (Vector2.new(screenPos.X, screenPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+				if distance < shortest then
+					shortest = distance
+					closest = player
 				end
 			end
 		end
 	end
-
-	return closestPlayer
+	return closest
 end
 
--- ===== ESP Functionality =====
-local ESPFolder = Instance.new("Folder", game.CoreGui)
-ESPFolder.Name = "ESP_Labels"
+-- ===== ESP Drawing (Boxes + Nomes) =====
+local DrawingESP = {}
 
-local ESPLabels = {}
-
-local function CreateESPLabel(player)
-	local billboard = Instance.new("BillboardGui")
-	billboard.Name = "ESPLabel"
-	billboard.AlwaysOnTop = true
-	billboard.Size = UDim2.new(0, 100, 0, 30)
-	billboard.StudsOffset = Vector3.new(0, 3, 0)
-	billboard.Enabled = ESPEnabled
-
-	local text = Instance.new("TextLabel", billboard)
-	text.Size = UDim2.new(1, 0, 1, 0)
-	text.BackgroundTransparency = 1
-	text.TextColor3 = Color3.fromRGB(255, 0, 0)
-	text.TextStrokeTransparency = 0.5
-	text.TextScaled = true
-	text.Font = Enum.Font.SourceSansBold
-	text.Text = player.Name
-
-	billboard.Parent = ESPFolder
-	return billboard
+local function CreateBox()
+	local box = Drawing.new("Square")
+	box.Thickness = 1.5
+	box.Filled = false
+	box.Visible = false
+	return box
 end
 
--- ===== Main Update Loop =====
+local function CreateName()
+	local text = Drawing.new("Text")
+	text.Size = 14
+	text.Center = true
+	text.Outline = true
+	text.Visible = false
+	return text
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+	if player ~= LocalPlayer then
+		DrawingESP[player] = {
+			Box = CreateBox(),
+			Name = CreateName(),
+		}
+	end
+end
+
+Players.PlayerAdded:Connect(function(player)
+	if player ~= LocalPlayer then
+		DrawingESP[player] = {
+			Box = CreateBox(),
+			Name = CreateName(),
+		}
+	end
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+	if DrawingESP[player] then
+		for _, obj in pairs(DrawingESP[player]) do
+			obj:Remove()
+		end
+		DrawingESP[player] = nil
+	end
+end)
+
+-- ===== Render Loop =====
 RunService.RenderStepped:Connect(function()
 	-- Aimbot
 	if AimbotEnabled then
 		local target = GetClosestVisiblePlayer()
 		if target and target.Character and target.Character:FindFirstChild("Head") then
-			local head = target.Character.Head.Position
-			local look = (head - Camera.CFrame.Position).Unit
+			local headPos = target.Character.Head.Position
+			local look = (headPos - Camera.CFrame.Position).Unit
 			Camera.CFrame = CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + look)
 		end
 	end
 
 	-- ESP
-	for _, player in pairs(Players:GetPlayers()) do
-		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Head") then
+			local hrp = player.Character.HumanoidRootPart
 			local head = player.Character.Head
-			local screenPoint, onScreen = Camera:WorldToViewportPoint(head.Position)
-			local visible = onScreen and IsVisible(head)
+			local box = DrawingESP[player].Box
+			local name = DrawingESP[player].Name
 
-			-- Criar label se não existir
-			if not ESPLabels[player] then
-				local label = CreateESPLabel(player)
-				label.Adornee = head
-				ESPLabels[player] = label
+			local rootPos, onScreen = Camera:WorldToViewportPoint(hrp.Position)
+			local headPos = Camera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.5, 0))
+			local footPos = Camera:WorldToViewportPoint(hrp.Position - Vector3.new(0, 3, 0))
+
+			local height = math.abs(footPos.Y - headPos.Y)
+			local width = height / 2
+
+			if onScreen and ESPEnabled then
+				box.Size = Vector2.new(width, height)
+				box.Position = Vector2.new(rootPos.X - width / 2, rootPos.Y - height / 2)
+				box.Visible = true
+
+				local visible = IsVisible(head)
+				box.Color = visible and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+
+				name.Text = player.Name
+				name.Position = Vector2.new(rootPos.X, rootPos.Y - height / 2 - 15)
+				name.Color = box.Color
+				name.Visible = true
+			else
+				box.Visible = false
+				name.Visible = false
 			end
-
-			-- Atualizar label
-			local label = ESPLabels[player]
-			label.Adornee = head
-			label.Enabled = ESPEnabled and visible
-		end
-	end
-
-	-- Limpar labels de jogadores que saíram
-	for player, label in pairs(ESPLabels) do
-		if not Players:FindFirstChild(player.Name) then
-			label:Destroy()
-			ESPLabels[player] = nil
+		elseif DrawingESP[player] then
+			DrawingESP[player].Box.Visible = false
+			DrawingESP[player].Name.Visible = false
 		end
 	end
 end)
